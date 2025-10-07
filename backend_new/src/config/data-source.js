@@ -4,9 +4,9 @@ const { DataSource } = require("typeorm");
 
 const AppDataSource = new DataSource({
   type: "oracle",
-  username: process.env.DB_USER,
-  password: process.env.DB_PASSWORD,
-  connectString: `${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_SERVICE}`,
+  username: process.env.ORACLE_USER,           // matches your .env
+  password: process.env.ORACLE_PASSWORD,       // matches your .env
+  connectString: process.env.ORACLE_CONNECT_STRING,  // matches your .env
   synchronize: true, // set false in production, use migrations
   logging: true,
   entities: ["src/entities/**/*.js"],

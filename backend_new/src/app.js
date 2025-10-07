@@ -9,7 +9,11 @@ const errorHandler = require("./middleware/errorHandler");
 
 
 const app = express();
-app.use(cors());
+app.use(cors(
+    origin= "http://10.195.33.45:3000", // your frontend URL
+  credentials= true, // allow cookies if needed
+  methods= ["GET", "POST", "PUT", "DELETE", "OPTIONS"]
+));
 app.use(bodyParser.json());
 app.use(errorHandler);
 

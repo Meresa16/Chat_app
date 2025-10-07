@@ -1,15 +1,25 @@
-import axios from "axios";
+import axios from 'axios';
 
-const API_BASE_URL = process.env.NEXT_PUBLIC_API_URL || "http://localhost:5000/api";
-
-export const api = axios.create({
-  baseURL: API_BASE_URL,
-  headers: {
-    "Content-Type": "application/json",
-  },
+const API = axios.create({
+  baseURL: process.env.NEXT_PUBLIC_API_URL || 'http://localhost:4000/api',
 });
 
-// Example endpoints
-export const getUsers = () => api.get("/users");
-export const loginUser = (data: { email: string; password: string }) => api.post("/auth/login", data);
-export const registerUser = (data: { name: string; email: string; password: string }) => api.post("/auth/register", data);
+export const setAuthToken = (token: string | null) => {
+  if (token) {
+    API.defaults.headers.common['Authorization'] = `Bearer ${token}`;
+  } else {
+    delete API.defaults.headers.common['Authorization'];
+  }
+};
+export const getGroups = async () => {
+  const res = await API.get('/groups');
+  return res.data;
+};
+
+export default API;
+
+
+
+
+
+
